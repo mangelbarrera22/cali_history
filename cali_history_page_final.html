@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#080808;color:#fff;overflow-x:hidden;}
+
+.hero{
+  position:relative;text-align:center;
+  padding:70px 24px 60px;
+  background:#080808;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,80,0,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,140,255,0.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-stripe{display:flex;justify-content:center;gap:6px;margin-bottom:24px;}
+.hero-stripe span{display:inline-block;width:28px;height:6px;border-radius:3px;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,12vw,100px);
+  font-weight:900;line-height:0.95;
+  background:linear-gradient(120deg,#FFB400 0%,#FF6B00 45%,#FF2D55 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:14px;
+}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.45);letter-spacing:6px;text-transform:uppercase;margin-bottom:16px;}
+.hero-tagline{font-size:16px;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 32px;line-height:1.7;}
+.hero-bar{width:60px;height:3px;background:linear-gradient(90deg,#FFB400,#FF2D55);margin:0 auto;border-radius:2px;}
+
+.section{padding:64px 24px;}
+.sec-head{text-align:center;margin-bottom:40px;}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,42px);font-weight:700;color:#fff;margin-bottom:10px;}
+.sec-head h2 em{font-style:normal;background:linear-gradient(90deg,#FFB400,#FF6B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-head p{font-size:14px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-top:8px;}
+.sec-bar{width:40px;height:3px;background:linear-gradient(90deg,#FFB400,#FF2D55);margin:0 auto;border-radius:2px;}
+
+/* FOLLETO — columna centrada */
+.folleto-wrap{background:#0f0f0f;}
+.folleto-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  max-width:480px;
+  margin:0 auto;
+}
+.folleto-card{
+  width:100%;
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,180,0,0.2);
+  background:#141414;
+  transition:transform 0.35s cubic-bezier(.22,.68,0,1.2),box-shadow 0.35s;
+  cursor:pointer;
+}
+.folleto-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 48px rgba(255,107,0,0.3);
+}
+/* imagen completa, sin recorte */
+.folleto-img-wrap{
+  width:100%;
+  background:#1c1c1c;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.folleto-img-wrap img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  transition:transform 0.4s ease;
+}
+.folleto-card:hover .folleto-img-wrap img{transform:scale(1.02);}
+.folleto-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;width:100%;padding:80px 0;
+  background:linear-gradient(135deg,#1a1a1a,#222);
+}
+.folleto-placeholder svg{opacity:0.2;}
+.folleto-placeholder p{font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:2px;text-transform:uppercase;}
+.folleto-tag{
+  padding:14px 18px;font-size:11px;font-weight:800;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#FFB400;text-align:center;
+  border-top:1px solid rgba(255,180,0,0.1);
+}
+
+/* VIDEO */
+.video-wrap{background:#080808;}
+.video-container{
+  max-width:800px;margin:0 auto;
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,180,0,0.15);
+  box-shadow:0 0 60px rgba(255,45,85,0.1);
+  aspect-ratio:16/9;
+}
+.video-container iframe{width:100%;height:100%;display:block;border:none;}
+
+/* HISTORY */
+.history-wrap{background:#0a0a0a;}
+.history-list{max-width:760px;margin:0 auto;}
+.hist-item{
+  display:flex;gap:24px;align-items:flex-start;
+  padding:30px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.hist-item:last-child{border-bottom:none;}
+.hist-num{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,#FFB400,#FF2D55);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  min-width:52px;text-align:right;flex-shrink:0;padding-top:2px;
+}
+.hist-verb{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#FF6B00;margin-bottom:6px;}
+.hist-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;}
+.hist-desc{font-size:14px;color:rgba(255,255,255,0.52);line-height:1.75;}
+.hist-desc strong{color:rgba(255,255,255,0.85);font-weight:700;}
+
+.footer{text-align:center;padding:44px 24px;border-top:1px solid rgba(255,255,255,0.06);}
+.footer p{font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;line-height:2;}
+.footer span{background:linear-gradient(90deg,#FFB400,#FF6B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stripe">
+    <span style="background:#1E843B;"></span>
+    <span style="background:#FFB400;"></span>
+    <span style="background:#CE1126;"></span>
+    <span style="background:#1E843B;"></span>
+    <span style="background:#FFB400;"></span>
+    <span style="background:#CE1126;"></span>
+  </div>
+  <div class="hero-sub">Santiago de Cali · Colombia</div>
+  <h1>CALI<br>HISTORY</h1>
+  <p class="hero-tagline">Discover the rich past of the city known as<br><span style="color:#FFB400;font-weight:700;">La Sucursal del Cielo</span></p>
+  <div class="hero-bar"></div>
+</section>
+
+<!-- FOLLETO -->
+<section class="section folleto-wrap">
+  <div class="sec-head">
+    <h2>Our <em>Brochure</em></h2>
+    <p>Front cover &amp; back cover</p>
+    <div style="height:12px;"></div>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="folleto-col">
+
+    <div class="folleto-card">
+      <div class="folleto-img-wrap">
+        <img
+          src="https://drive.google.com/thumbnail?id=1iz86pSrcf8S_tw3GSl3S42GaYu_fK0ga&sz=w800"
+          alt="Brochure Front Cover"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <div class="folleto-placeholder" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <p>Front cover</p>
+        </div>
+      </div>
+      <div class="folleto-tag">Front Cover</div>
+    </div>
+
+    <div class="folleto-card">
+      <div class="folleto-img-wrap">
+        <img
+          src="https://drive.google.com/thumbnail?id=1dA8a9stLGjpquVwolomkXJJNl_MilqHA&sz=w800"
+          alt="Brochure Back Cover"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <div class="folleto-placeholder" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <p>Back cover</p>
+        </div>
+      </div>
+      <div class="folleto-tag">Back Cover</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="section video-wrap">
+  <div class="sec-head">
+    <h2>Featured <em>Video</em></h2>
+    <p>Watch and explore the history of Cali</p>
+    <div style="height:12px;"></div>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/q9CjQbvN39E?si=3Vzgis-O4WDLHtc9"
+      title="Cali History - YouTube"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- HISTORY LIST -->
+<section class="section history-wrap">
+  <div class="sec-head">
+    <h2>Five Things That Have <em>Changed Over Time</em></h2>
+    <p>Key transformations in the history of Cali — present perfect</p>
+    <div style="height:12px;"></div>
+    <div class="sec-bar"></div>
+  </div>
+  <div class="history-list">
+
+    <div class="hist-item">
+      <div class="hist-num">01</div>
+      <div>
+        <span class="hist-verb">Urban Growth</span>
+        <div class="hist-title">The city has expanded far beyond its original borders</div>
+        <p class="hist-desc">Cali <strong>has grown</strong> from a small colonial settlement founded in 1536 into one of Colombia's largest metropolitan areas, transforming lush valleys and steep hillsides into vibrant, densely populated urban neighborhoods.</p>
+      </div>
+    </div>
+
+    <div class="hist-item">
+      <div class="hist-num">02</div>
+      <div>
+        <span class="hist-verb">Cultural Identity</span>
+        <div class="hist-title">Salsa has become the beating heart of the city</div>
+        <p class="hist-desc">Since the mid-20th century, salsa music <strong>has woven itself</strong> deeply into the soul of Cali, earning the city its legendary worldwide title as the <em style="color:rgba(255,255,255,0.75)">World Capital of Salsa</em>.</p>
+      </div>
+    </div>
+
+    <div class="hist-item">
+      <div class="hist-num">03</div>
+      <div>
+        <span class="hist-verb">Public Transport</span>
+        <div class="hist-title">The MIO system has transformed how people move</div>
+        <p class="hist-desc">The Masivo Integrado de Occidente <strong>has replaced</strong> the old chaotic bus network with a modern Bus Rapid Transit system, connecting millions of passengers across the city every single day.</p>
+      </div>
+    </div>
+
+    <div class="hist-item">
+      <div class="hist-num">04</div>
+      <div>
+        <span class="hist-verb">Economy</span>
+        <div class="hist-title">Industry and commerce have reshaped the local economy</div>
+        <p class="hist-desc">Over the decades, Cali <strong>has shifted</strong> from an agrarian sugar-cane economy to a diversified industrial and services hub, and the Cauca Valley <strong>has become</strong> one of Colombia's most productive economic corridors.</p>
+      </div>
+    </div>
+
+    <div class="hist-item">
+      <div class="hist-num">05</div>
+      <div>
+        <span class="hist-verb">Sports Legacy</span>
+        <div class="hist-title">International games have put Cali on the world map</div>
+        <p class="hist-desc">Since hosting the <strong>1971 Pan American Games</strong>, Cali <strong>has built</strong> a world-class sports infrastructure and <strong>has established</strong> itself as a premier destination for major international athletic competitions across Latin America.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Proudly made · <span>Cali History</span> · Santiago de Cali, Colombia</p>
+  <p>The Branch of Heaven · Since 1536</p>
+</footer>
+
+</body>
+</html>
